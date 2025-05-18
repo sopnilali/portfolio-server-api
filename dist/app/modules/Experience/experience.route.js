@@ -11,6 +11,6 @@ const experience_controller_1 = require("./experience.controller");
 const router = express_1.default.Router();
 router.post('/', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.createExperience);
 router.get('/', experience_controller_1.ExperienceController.getAllExperience); // public route
-router.put('/:id', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.updateExperience);
+router.patch('/:id', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.updateExperience);
 router.delete('/:id', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.deleteExperience);
 exports.ExperienceRoutes = router;

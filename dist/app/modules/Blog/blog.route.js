@@ -16,7 +16,10 @@ router.post('/create', (0, auth_1.default)(client_1.UserRole.Admin), fileUploade
 });
 router.get('/all', blog_controller_1.BlogController.getAllBlog);
 router.get('/:id', blog_controller_1.BlogController.getSingleBlog);
-router.put('/:id', (0, auth_1.default)(client_1.UserRole.Admin), blog_controller_1.BlogController.updateBlog);
+router.patch('/:id', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('thumbnail'), (req, res) => {
+    req.body = JSON.parse(req.body.data);
+    blog_controller_1.BlogController.updateBlog(req, res);
+});
 router.delete('/:id', (0, auth_1.default)(client_1.UserRole.Admin), blog_controller_1.BlogController.deleteBlog);
 router.post('/editor-upload', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.editorUpload.single('file'), blog_controller_1.BlogController.editorUpload);
 exports.BlogRoutes = router;

@@ -10,7 +10,7 @@ router.post('/', auth(UserRole.Admin), ExperienceController.createExperience)
 
 router.get('/', ExperienceController.getAllExperience) // public route
 
-router.put('/:id', auth(UserRole.Admin), ExperienceController.updateExperience)
+router.patch('/:id', auth(UserRole.Admin), ExperienceController.updateExperience)
 
 router.delete('/:id', auth(UserRole.Admin), ExperienceController.deleteExperience)
 

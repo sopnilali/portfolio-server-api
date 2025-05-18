@@ -14,7 +14,7 @@ router.post("/", auth(UserRole.Admin), FileUploader.upload.single("file"), (req:
 router.get("/", SkillController.getAllSkill) // public route
 router.get("/:id", SkillController.getSingleSkill) // public route
 
-router.put("/:id", auth(UserRole.Admin), FileUploader.upload.single("file"), (req: Request, res: Response, next: NextFunction)=> {
+router.patch("/:id", auth(UserRole.Admin), FileUploader.upload.single("file"), (req: Request, res: Response, next: NextFunction)=> {
     req.body = JSON.parse(req.body.data)
     return SkillController.updateSkill(req, res, next)
 })

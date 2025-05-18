@@ -16,7 +16,7 @@ router.post("/", (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.Fi
 });
 router.get("/", skill_controller_1.SkillController.getAllSkill); // public route
 router.get("/:id", skill_controller_1.SkillController.getSingleSkill); // public route
-router.put("/:id", (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single("file"), (req, res, next) => {
+router.patch("/:id", (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single("file"), (req, res, next) => {
     req.body = JSON.parse(req.body.data);
     return skill_controller_1.SkillController.updateSkill(req, res, next);
 });

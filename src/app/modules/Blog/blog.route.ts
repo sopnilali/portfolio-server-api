@@ -12,7 +12,10 @@ router.post('/create', auth(UserRole.Admin), FileUploader.upload.single('thumbna
 })
 router.get('/all', BlogController.getAllBlog)
 router.get('/:id', BlogController.getSingleBlog)
-router.put('/:id', auth(UserRole.Admin), BlogController.updateBlog)
+router.patch('/:id', auth(UserRole.Admin), FileUploader.upload.single('thumbnail'), (req: any, res: any) => {
+    req.body = JSON.parse(req.body.data)
+    BlogController.updateBlog(req, res)
+})
 router.delete('/:id', auth(UserRole.Admin), BlogController.deleteBlog)
 
 router.post('/editor-upload', auth(UserRole.Admin), FileUploader.editorUpload.single('file'), BlogController.editorUpload)
