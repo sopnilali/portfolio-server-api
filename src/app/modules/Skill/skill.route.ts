@@ -20,4 +20,4 @@ router.put("/:id", auth(UserRole.Admin), FileUploader.upload.single("file"), (re
 })
 router.delete("/:id", auth(UserRole.Admin), SkillController.deleteSkill)
 
-export default router
+export const SkillRoutes = router
