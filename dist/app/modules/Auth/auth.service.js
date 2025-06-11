@@ -32,15 +32,6 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -52,20 +43,20 @@ const prisma_1 = __importDefault(require("../../utils/prisma"));
 const bcrypt = __importStar(require("bcrypt"));
 const token_1 = require("../../utils/token");
 const config_1 = __importDefault(require("../../config"));
-const userLogin = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const userLogin = async (payload) => {
     const { email, password } = payload;
-    const existUser = yield prisma_1.default.user.findUnique({
+    const existUser = await prisma_1.default.user.findUnique({
         where: {
             email
         }
     });
-    if ((existUser === null || existUser === void 0 ? void 0 : existUser.status) === "Blocked") {
+    if (existUser?.status === "Blocked") {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User is Blocked");
     }
     if (!existUser) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User Not Found");
     }
-    const isPasswordMatch = yield bcrypt.compare(password, existUser.password);
+    const isPasswordMatch = await bcrypt.compare(password, existUser.password);
     if (!isPasswordMatch) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Password is incorrect");
     }
@@ -81,10 +72,10 @@ const userLogin = (payload) => __awaiter(void 0, void 0, void 0, function* () {
         accessToken,
         refreshToken,
     };
-});
-const logoutUser = () => __awaiter(void 0, void 0, void 0, function* () {
+};
+const logoutUser = async () => {
     return null;
-});
+};
 exports.AuthService = {
     userLogin,
     logoutUser

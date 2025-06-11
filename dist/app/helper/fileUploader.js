@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -77,7 +68,7 @@ const createUploadMiddleware = (isEditorUpload = false) => {
 const upload = createUploadMiddleware(false);
 // Editor-specific upload middleware (for TapTap editor or similar)
 const editorUpload = createUploadMiddleware(true);
-const uploadToCloudinary = (file_1, ...args_1) => __awaiter(void 0, [file_1, ...args_1], void 0, function* (file, resourceType = 'auto') {
+const uploadToCloudinary = async (file, resourceType = 'auto') => {
     return new Promise((resolve, reject) => {
         const uploadOptions = {
             resource_type: resourceType,
@@ -101,11 +92,11 @@ const uploadToCloudinary = (file_1, ...args_1) => __awaiter(void 0, [file_1, ...
             }
         });
     });
-});
+};
 // Special upload handler for editor files (returns formatted response for editors)
-const uploadEditorFileToCloudinary = (file) => __awaiter(void 0, void 0, void 0, function* () {
+const uploadEditorFileToCloudinary = async (file) => {
     try {
-        const result = yield uploadToCloudinary(file, 'auto');
+        const result = await uploadToCloudinary(file, 'auto');
         // Format response according to TapTap editor's expected format
         return {
             success: 1,
@@ -127,7 +118,7 @@ const uploadEditorFileToCloudinary = (file) => __awaiter(void 0, void 0, void 0,
             message: error instanceof Error ? error.message : 'Upload failed'
         };
     }
-});
+};
 exports.FileUploader = {
     upload, // Regular file upload middleware
     editorUpload, // Special middleware for editor uploads

@@ -32,26 +32,6 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -65,22 +45,22 @@ const bcrypt = __importStar(require("bcrypt"));
 const config_1 = __importDefault(require("../../config"));
 const user_constant_1 = require("./user.constant");
 const paginationHelper_1 = require("../../helper/paginationHelper");
-const createUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
+const createUser = async (req) => {
     const file = req.file;
     if (file) {
-        const uploadFile = yield fileUploader_1.FileUploader.uploadToCloudinary(file);
-        req.body.avaterUrl = uploadFile === null || uploadFile === void 0 ? void 0 : uploadFile.secure_url;
+        const uploadFile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
+        req.body.avaterUrl = uploadFile?.secure_url;
     }
-    const hashPassword = yield bcrypt.hash(req.body.password, config_1.default.saltRounds);
+    const hashPassword = await bcrypt.hash(req.body.password, config_1.default.saltRounds);
     req.body.password = hashPassword;
-    const result = yield prisma_1.default.user.create({
+    const result = await prisma_1.default.user.create({
         data: req.body
     });
     return result;
-});
-const getAllUser = (params, options) => __awaiter(void 0, void 0, void 0, function* () {
+};
+const getAllUser = async (params, options) => {
     const { page, limit, skip } = paginationHelper_1.paginationHelper.calculatePagination(options);
-    const { searchTerm } = params, filterData = __rest(params, ["searchTerm"]);
+    const { searchTerm, ...filterData } = params;
     const andCondition = [];
     if (params.searchTerm) {
         andCondition.push({
@@ -102,7 +82,7 @@ const getAllUser = (params, options) => __awaiter(void 0, void 0, void 0, functi
         });
     }
     const whereConditons = andCondition.length > 0 ? { AND: andCondition } : {};
-    const result = yield prisma_1.default.user.findMany({
+    const result = await prisma_1.default.user.findMany({
         where: whereConditons,
         skip,
         take: limit,
@@ -122,7 +102,7 @@ const getAllUser = (params, options) => __awaiter(void 0, void 0, void 0, functi
             updatedAt: true
         }
     });
-    const total = yield prisma_1.default.user.count({
+    const total = await prisma_1.default.user.count({
         where: whereConditons,
     });
     return {
@@ -133,39 +113,39 @@ const getAllUser = (params, options) => __awaiter(void 0, void 0, void 0, functi
         },
         data: result
     };
-});
-const getSingleUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.user.findUnique({
+};
+const getSingleUser = async (id) => {
+    const result = await prisma_1.default.user.findUnique({
         where: {
             id
         }
     });
     return result;
-});
-const updateUser = (id, req) => __awaiter(void 0, void 0, void 0, function* () {
+};
+const updateUser = async (id, req) => {
     const file = req.file;
     if (file) {
-        const result = yield fileUploader_1.FileUploader.uploadToCloudinary(file);
-        req.body.profilePhoto = result === null || result === void 0 ? void 0 : result.secure_url;
+        const result = await fileUploader_1.FileUploader.uploadToCloudinary(file);
+        req.body.profilePhoto = result?.secure_url;
     }
-    const result = yield prisma_1.default.user.update({
+    const result = await prisma_1.default.user.update({
         where: {
             id
         },
         data: req.body
     });
     return result;
-});
-const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.user.delete({
+};
+const deleteUser = async (id) => {
+    const result = await prisma_1.default.user.delete({
         where: {
             id
         }
     });
     return result;
-});
-const SoftdeleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const existUser = yield prisma_1.default.user.findUnique({
+};
+const SoftdeleteUser = async (id) => {
+    const existUser = await prisma_1.default.user.findUnique({
         where: {
             id
         }
@@ -173,14 +153,14 @@ const SoftdeleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (!existUser) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User Not Found");
     }
-    const result = yield prisma_1.default.user.update({
+    const result = await prisma_1.default.user.update({
         where: { id },
         data: {
             isDeleted: true
         }
     });
     return result;
-});
+};
 exports.UserService = {
     createUser,
     getAllUser,

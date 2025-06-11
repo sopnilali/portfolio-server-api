@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -16,51 +7,51 @@ exports.SkillController = void 0;
 const catchAsync_1 = require("../../helper/catchAsync");
 const sendResponse_1 = __importDefault(require("../../helper/sendResponse"));
 const skill_service_1 = require("./skill.service");
-const createSkill = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield skill_service_1.SkillService.createSkill(req);
+const createSkill = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const result = await skill_service_1.SkillService.createSkill(req);
     (0, sendResponse_1.default)(res, {
         success: true,
         message: "Skill created successfully",
         statusCode: 200,
         data: result
     });
-}));
-const getAllSkill = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield skill_service_1.SkillService.getAllSkill();
+});
+const getAllSkill = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const result = await skill_service_1.SkillService.getAllSkill();
     (0, sendResponse_1.default)(res, {
         success: true,
         message: "Skill fetched successfully",
         statusCode: 200,
         data: result
     });
-}));
-const getSingleSkill = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield skill_service_1.SkillService.getSingleSkill(req.params.id);
+});
+const getSingleSkill = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const result = await skill_service_1.SkillService.getSingleSkill(req.params.id);
     (0, sendResponse_1.default)(res, {
         success: true,
         message: "Skill fetched successfully",
         statusCode: 200,
         data: result
     });
-}));
-const updateSkill = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield skill_service_1.SkillService.updateSkill(req.params.id, req);
+});
+const updateSkill = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const result = await skill_service_1.SkillService.updateSkill(req.params.id, req);
     (0, sendResponse_1.default)(res, {
         success: true,
         message: "Skill updated successfully",
         statusCode: 200,
         data: result
     });
-}));
-const deleteSkill = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield skill_service_1.SkillService.deleteSkill(req.params.id);
+});
+const deleteSkill = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const result = await skill_service_1.SkillService.deleteSkill(req.params.id);
     (0, sendResponse_1.default)(res, {
         success: true,
         message: "Skill deleted successfully",
         statusCode: 200,
         data: result
     });
-}));
+});
 exports.SkillController = {
     createSkill, getAllSkill, getSingleSkill, updateSkill, deleteSkill
 };
