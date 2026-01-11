@@ -1,11 +1,11 @@
-import prisma from "../../utils/prisma";
-import { FileUploader } from "../../helper/fileUploader";
-import AppError from "../../errors/AppError";
+import prisma from "../../utils/prisma.js";
+import { FileUploader } from "../../helper/fileUploader.js";
+import AppError from "../../errors/AppError.js";
 import status from "http-status";
 import * as bcrypt from "bcrypt";
-import config from "../../config";
-import { userSearchAbleFields } from "./user.constant";
-import { paginationHelper } from "../../helper/paginationHelper";
+import config from "../../config/index.js";
+import { userSearchAbleFields } from "./user.constant.js";
+import { paginationHelper } from "../../helper/paginationHelper.js";
 const createUser = async (req) => {
     const file = req.file;
     if (file) {

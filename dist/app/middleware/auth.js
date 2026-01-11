@@ -1,8 +1,8 @@
 import status from "http-status";
-import AppError from "../errors/AppError";
-import { catchAsync } from "../helper/catchAsync";
-import { TokenUtils } from "../utils/token";
-import config from "../config";
+import AppError from "../errors/AppError.js";
+import { catchAsync } from "../helper/catchAsync.js";
+import { TokenUtils } from "../utils/token.js";
+import config from "../config/index.js";
 const auth = (...roles) => {
     return catchAsync(async (req, res, next) => {
         let token;

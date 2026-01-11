@@ -1,4 +1,4 @@
-import app from "./app";
+import app from "./app.js";
 let server;
 const PORT = process.env.PORT || 5000;
 const main = () => {

@@ -1,6 +1,6 @@
-import { catchAsync } from "../../helper/catchAsync"
-import sendResponse from "../../helper/sendResponse"
-import { SkillService } from "./skill.service"
+import { catchAsync } from "../../helper/catchAsync.js"
+import sendResponse from "../../helper/sendResponse.js"
+import { SkillService } from "./skill.service.js"
 
 const createSkill = catchAsync(async (req, res) => {
     const result = await SkillService.createSkill(req)

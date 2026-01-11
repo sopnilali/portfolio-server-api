@@ -2,8 +2,8 @@ import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import status from 'http-status'
-import router from './app/routes'
-import globalErrorHandler from './app/middleware/globalErrorHandler'
+import router from './app/routes/index.js'
+import globalErrorHandler from './app/middleware/globalErrorHandler.js'
 
 
 const app = express()

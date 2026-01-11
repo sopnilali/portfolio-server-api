@@ -1,8 +1,8 @@
 import express from 'express';
-import auth from '../../middleware/auth';
+import auth from '../../middleware/auth.js';
 import { UserRole } from '@prisma/client';
-import { FileUploader } from '../../helper/fileUploader';
-import { ProjectController } from './project.controller';
+import { FileUploader } from '../../helper/fileUploader.js';
+import { ProjectController } from "./project.controller.js";
 const router = express.Router();
 router.post('/', auth(UserRole.Admin), FileUploader.upload.single('file'), (req, res, next) => {
     req.body = JSON.parse(req.body.data);

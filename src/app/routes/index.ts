@@ -1,12 +1,12 @@
 import express from 'express'
-import { UserRoutes } from '../modules/User/user.route';
-import { AuthRoutes } from '../modules/Auth/auth.route';
-import {  ProjectRoutes } from '../modules/Project/project.route';
-import { ExperienceRoutes } from '../modules/Experience/experience.route';
-import { BlogRoutes } from '../modules/Blog/blog.route';
-import { SkillRoutes } from '../modules/Skill/skill.route';
-import { ContactRoutes } from '../modules/Contact/contact.route';
-import { Aboutroutes } from '../modules/About/about.route';
+import { UserRoutes } from '../modules/User/user.route.js';
+import { AuthRoutes } from '../modules/Auth/auth.route.js';
+import {  ProjectRoutes } from '../modules/Project/project.route.js';
+import { ExperienceRoutes } from '../modules/Experience/experience.route.js';
+import { BlogRoutes } from '../modules/Blog/blog.route.js';
+import { SkillRoutes } from '../modules/Skill/skill.route.js';
+import { ContactRoutes } from '../modules/Contact/contact.route.js';
+import { Aboutroutes } from '../modules/About/about.route.js';
 
 const router = express.Router()
 

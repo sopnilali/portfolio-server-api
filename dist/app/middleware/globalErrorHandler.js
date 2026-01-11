@@ -1,7 +1,7 @@
 import { ZodError } from 'zod';
-import AppError from '../errors/AppError';
-import handleZodError from './handleZodError';
-import handleDuplicateError from './handleDuplicateError';
+import AppError from '../errors/AppError.js';
+import handleZodError from './handleZodError.js';
+import handleDuplicateError from './handleDuplicateError.js';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 const globalErrorHandler = (err, req, res, next) => {
     //setting default values

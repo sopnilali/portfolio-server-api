@@ -1,9 +1,9 @@
 import status from "http-status";
-import AppError from "../../errors/AppError";
-import prisma from "../../utils/prisma";
+import AppError from "../../errors/AppError.js";
+import prisma from "../../utils/prisma.js";
 import * as bcrypt from "bcrypt";
-import { TokenUtils } from "../../utils/token";
-import config from "../../config";
+import { TokenUtils } from "../../utils/token.js";
+import config from "../../config/index.js";
 const userLogin = async (payload) => {
     const { email, password } = payload;
     const existUser = await prisma.user.findUnique({

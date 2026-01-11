@@ -1,4 +1,4 @@
-import prisma from "../../utils/prisma";
+import prisma from "../../utils/prisma.js";
 const createContact = async (req) => {
     const result = await prisma.contact.create({
         data: req.body

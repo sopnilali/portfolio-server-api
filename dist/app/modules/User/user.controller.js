@@ -1,9 +1,9 @@
 import status from "http-status";
-import { catchAsync } from "../../helper/catchAsync";
-import sendResponse from "../../helper/sendResponse";
-import { UserService } from "./user.service";
-import pick from "../../utils/pick";
-import { userFilterableFields } from "./user.constant";
+import { catchAsync } from "../../helper/catchAsync.js";
+import sendResponse from "../../helper/sendResponse.js";
+import { UserService } from "./user.service.js";
+import pick from "../../utils/pick.js";
+import { userFilterableFields } from "./user.constant.js";
 const createUser = catchAsync(async (req, res) => {
     const result = await UserService.createUser(req);
     sendResponse(res, {

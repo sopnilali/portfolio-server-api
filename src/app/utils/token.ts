@@ -1,6 +1,6 @@
 import { Secret, SignOptions } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
-import { IAuthUser } from "../modules/Auth/auth.interface";
+import { IAuthUser } from "../modules/Auth/auth.interface.js";
 
 
 const GenerateToken = (jwtPayload: IAuthUser, secret: Secret, expiresIn: number | any) => {

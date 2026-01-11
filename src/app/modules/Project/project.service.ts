@@ -1,6 +1,6 @@
 
-import { FileUploader } from "../../helper/fileUploader"
-import prisma from "../../utils/prisma"
+import { FileUploader } from "../../helper/fileUploader.js"
+import prisma from "../../utils/prisma.js"
 
 const createProject = async (req: any)=> {
     const file = req.file

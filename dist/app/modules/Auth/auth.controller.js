@@ -1,8 +1,8 @@
 import status from "http-status";
-import config from "../../config";
-import { catchAsync } from "../../helper/catchAsync";
-import sendResponse from "../../helper/sendResponse";
-import { AuthService } from "./auth.service";
+import config from "../../config/index.js";
+import { catchAsync } from "../../helper/catchAsync.js";
+import sendResponse from "../../helper/sendResponse.js";
+import { AuthService } from "./auth.service.js";
 const loginUser = catchAsync(async (req, res) => {
     const result = await AuthService.userLogin(req.body);
     res.cookie("refreshToken", result.refreshToken, {

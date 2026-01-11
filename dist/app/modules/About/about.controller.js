@@ -1,6 +1,6 @@
-import { catchAsync } from "../../helper/catchAsync";
-import sendResponse from "../../helper/sendResponse";
-import { aboutService } from "./about.service";
+import { catchAsync } from "../../helper/catchAsync.js";
+import sendResponse from "../../helper/sendResponse.js";
+import { aboutService } from "./about.service.js";
 const createAbout = catchAsync(async (req, res) => {
     const result = await aboutService.createAboutfromDB(req);
     sendResponse(res, {

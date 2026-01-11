@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-vars */
 import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
-import config from '../config';
-import AppError from '../errors/AppError';
-import { TErrorSources } from '../interface/errors';
-import handleZodError from './handleZodError';
-import handleDuplicateError from './handleDuplicateError';
+import config from '../config/index.js';
+import AppError from '../errors/AppError.js';
+import { TErrorSources } from '../interface/errors.js';
+import handleZodError from './handleZodError.js';
+import handleDuplicateError from './handleDuplicateError.js';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 
 

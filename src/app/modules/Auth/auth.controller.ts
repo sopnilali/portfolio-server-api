@@ -1,9 +1,9 @@
 import status from "http-status";
-import config from "../../config";
-import { catchAsync } from "../../helper/catchAsync";
-import sendResponse from "../../helper/sendResponse";
-import { IAuth } from "./auth.interface";
-import { AuthService } from "./auth.service";
+import config from "../../config/index.js";
+import { catchAsync } from "../../helper/catchAsync.js";
+import sendResponse from "../../helper/sendResponse.js";
+import { IAuth } from "./auth.interface.js";
+import { AuthService } from "./auth.service.js";
 
 const loginUser = catchAsync(async (req, res) => {
     const result = await AuthService.userLogin(req.body as IAuth);

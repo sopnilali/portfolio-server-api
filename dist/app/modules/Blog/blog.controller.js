@@ -1,4 +1,4 @@
-import { BlogService } from "./blog.service";
+import { BlogService } from "./blog.service.js";
 const createBlog = async (req, res) => {
     const result = await BlogService.createBlog(req);
     res.status(200).json({

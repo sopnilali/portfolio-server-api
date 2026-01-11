@@ -1,10 +1,10 @@
 import status from "http-status";
-import AppError from "../../errors/AppError";
-import prisma from "../../utils/prisma";
+import AppError from "../../errors/AppError.js";
+import prisma from "../../utils/prisma.js";
 import * as bcrypt from "bcrypt";
-import { IAuth, IAuthUser } from "./auth.interface";
-import { TokenUtils } from "../../utils/token";
-import config from "../../config";
+import { IAuth, IAuthUser } from "./auth.interface.js";
+import { TokenUtils } from "../../utils/token.js";
+import config from "../../config/index.js";
 import { Secret } from "jsonwebtoken";
 
 const userLogin = async (payload: IAuth) => {

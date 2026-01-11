@@ -1,7 +1,7 @@
 import express from 'express';
 import { UserRole } from '@prisma/client';
-import auth from '../../middleware/auth';
-import { ExperienceController } from './experience.controller';
+import auth from '../../middleware/auth.js';
+import { ExperienceController } from "./experience.controller.js";
 const router = express.Router();
 router.post('/', auth(UserRole.Admin), ExperienceController.createExperience);
 router.get('/', ExperienceController.getAllExperience); // public route

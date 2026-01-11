@@ -1,6 +1,6 @@
 import express from "express"
-import { ContactController } from "./contact.controller"
-import auth from "../../middleware/auth"
+import { ContactController } from "./contact.controller.js"
+import auth from "../../middleware/auth.js"
 import { UserRole } from "@prisma/client"
 
 const router = express.Router()

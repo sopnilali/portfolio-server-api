@@ -1,4 +1,4 @@
-import prisma from "../../utils/prisma";
+import prisma from "../../utils/prisma.js";
 const createExperience = async (req) => {
     const result = await prisma.$transaction(async (tx) => {
         // Create new record

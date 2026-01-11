@@ -1,6 +1,6 @@
-import { ContactService } from "./contact.service"
-import { catchAsync } from "../../helper/catchAsync"
-import sendResponse from "../../helper/sendResponse"
+import { ContactService } from "./contact.service.js"
+import { catchAsync } from "../../helper/catchAsync.js"
+import sendResponse from "../../helper/sendResponse.js"
 
 const createContact = catchAsync(async (req, res) => {
     const result = await ContactService.createContact(req)
