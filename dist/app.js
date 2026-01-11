@@ -12,7 +12,7 @@ const globalErrorHandler_1 = __importDefault(require("./app/middleware/globalErr
 const app = (0, express_1.default)();
 // CORS configuration
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', 'https://www.sharpshooterpubg.xyz', 'https://sharpshooterpubg.xyz', 'https://my-portfolio-dashboard-nine.vercel.app', 'https://mdabduladudui.vercel.app'],
+    origin: ['http://localhost:3000', 'https://www.sharpshooterpubg.xyz', 'https://sharpshooterpubg.xyz', "https://dashboard.sharpshooterpubg.xyz", 'https://my-portfolio-dashboard-nine.vercel.app', 'https://mdabduladudui.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
