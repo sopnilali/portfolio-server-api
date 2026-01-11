@@ -1,30 +1,36 @@
-import multer from "multer";
-import path from "path";
-import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
-import config from "../config/index.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FileUploader = void 0;
+const multer_1 = __importDefault(require("multer"));
+const path_1 = __importDefault(require("path"));
+const cloudinary_1 = require("cloudinary");
+const fs_1 = __importDefault(require("fs"));
+const index_1 = __importDefault(require("../config/index"));
 // Configure Cloudinary
-cloudinary.config({
-    cloud_name: config.cloudinary.cloud_name,
-    api_key: config.cloudinary.api_key,
-    api_secret: config.cloudinary.api_secret,
+cloudinary_1.v2.config({
+    cloud_name: index_1.default.cloudinary.cloud_name,
+    api_key: index_1.default.cloudinary.api_key,
+    api_secret: index_1.default.cloudinary.api_secret,
 });
 const isVercel = process.env.VERCEL === '1';
-const uploadPath = isVercel ? '/tmp' : path.join(process.cwd(), 'tmp');
+const uploadPath = isVercel ? '/tmp' : path_1.default.join(process.cwd(), 'tmp');
 // Ensure upload directory exists
 const ensureUploadPathExists = () => {
-    if (!isVercel && !fs.existsSync(uploadPath)) {
-        fs.mkdirSync(uploadPath, { recursive: true });
+    if (!isVercel && !fs_1.default.existsSync(uploadPath)) {
+        fs_1.default.mkdirSync(uploadPath, { recursive: true });
     }
 };
 ensureUploadPathExists();
-const storage = multer.diskStorage({
+const storage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
         cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
+        cb(null, uniqueSuffix + path_1.default.extname(file.originalname));
     },
 });
 // File filter for different upload scenarios
@@ -49,7 +55,7 @@ const fileFilter = (req, file, cb) => {
 };
 // Configure multer with different options for editor vs regular uploads
 const createUploadMiddleware = (isEditorUpload = false) => {
-    return multer({
+    return (0, multer_1.default)({
         storage,
         limits: {
             fileSize: isEditorUpload ? 20 * 1024 * 1024 : 10 * 1024 * 1024, // 20MB for editor, 10MB otherwise
@@ -68,9 +74,9 @@ const uploadToCloudinary = async (file, resourceType = 'auto') => {
             resource_type: resourceType,
             folder: resourceType === 'image' ? 'editor-images' : 'documents',
         };
-        cloudinary.uploader.upload(file.path, uploadOptions, (err, result) => {
+        cloudinary_1.v2.uploader.upload(file.path, uploadOptions, (err, result) => {
             // Clean up temp file
-            fs.unlink(file.path, (unlinkError) => {
+            fs_1.default.unlink(file.path, (unlinkError) => {
                 if (unlinkError)
                     console.error('Error deleting temp file:', unlinkError);
             });
@@ -113,7 +119,7 @@ const uploadEditorFileToCloudinary = async (file) => {
         };
     }
 };
-export const FileUploader = {
+exports.FileUploader = {
     upload, // Regular file upload middleware
     editorUpload, // Special middleware for editor uploads
     uploadToCloudinary, // Regular Cloudinary upload

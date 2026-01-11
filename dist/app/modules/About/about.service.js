@@ -1,29 +1,35 @@
-import { FileUploader } from "../../helper/fileUploader.js";
-import prisma from "../../utils/prisma.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.aboutService = void 0;
+const fileUploader_1 = require("../../helper/fileUploader");
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createAboutfromDB = async (req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.imageUrl = uploadfile?.secure_url;
     }
-    const result = await prisma.about.create({
+    const result = await prisma_1.default.about.create({
         data: req.body
     });
     return result;
 };
 const GetAllAboutfromDB = async () => {
-    const result = await prisma.about.findMany();
+    const result = await prisma_1.default.about.findMany();
     return result;
 };
 const updateAboutfromDB = async (id, req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.imageUrl = uploadfile?.secure_url;
     }
     // Extract only the fields that are allowed (exclude auto-generated fields)
     const { id: _, createdAt, updatedAt, ...data } = req.body;
-    const result = await prisma.about.update({
+    const result = await prisma_1.default.about.update({
         where: {
             id
         },
@@ -36,7 +42,7 @@ const updateAboutfromDB = async (id, req) => {
     });
     return result;
 };
-export const aboutService = {
+exports.aboutService = {
     createAboutfromDB,
     updateAboutfromDB,
     GetAllAboutfromDB

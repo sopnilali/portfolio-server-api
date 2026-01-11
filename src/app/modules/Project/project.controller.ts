@@ -1,6 +1,6 @@
-import { catchAsync } from "../../helper/catchAsync.js";
-import sendResponse from "../../helper/sendResponse.js";
-import { ProjectService } from "./project.service.js";
+import { catchAsync } from "../../helper/catchAsync";
+import sendResponse from "../../helper/sendResponse";
+import { ProjectService } from "./project.service";
 
 
 const createProject = catchAsync(async (req, res) => {

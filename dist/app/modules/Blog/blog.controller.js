@@ -1,6 +1,9 @@
-import { BlogService } from "./blog.service.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BlogController = void 0;
+const blog_service_1 = require("./blog.service");
 const createBlog = async (req, res) => {
-    const result = await BlogService.createBlog(req);
+    const result = await blog_service_1.BlogService.createBlog(req);
     res.status(200).json({
         success: true,
         message: "Blog created successfully",
@@ -8,7 +11,7 @@ const createBlog = async (req, res) => {
     });
 };
 const getAllBlog = async (req, res) => {
-    const result = await BlogService.getAllBlog();
+    const result = await blog_service_1.BlogService.getAllBlog();
     res.status(200).json({
         success: true,
         message: "Blogs fetched successfully",
@@ -16,7 +19,7 @@ const getAllBlog = async (req, res) => {
     });
 };
 const getSingleBlog = async (req, res) => {
-    const result = await BlogService.getSingleBlog(req.params.id);
+    const result = await blog_service_1.BlogService.getSingleBlog(req.params.id);
     res.status(200).json({
         success: true,
         message: "Blog fetched successfully",
@@ -24,7 +27,7 @@ const getSingleBlog = async (req, res) => {
     });
 };
 const updateBlog = async (req, res) => {
-    const result = await BlogService.updateBlog(req.params.id, req);
+    const result = await blog_service_1.BlogService.updateBlog(req.params.id, req);
     res.status(200).json({
         success: true,
         message: "Blog updated successfully",
@@ -32,7 +35,7 @@ const updateBlog = async (req, res) => {
     });
 };
 const deleteBlog = async (req, res) => {
-    const result = await BlogService.deleteBlog(req.params.id);
+    const result = await blog_service_1.BlogService.deleteBlog(req.params.id);
     res.status(200).json({
         success: true,
         message: "Blog deleted successfully",
@@ -40,11 +43,11 @@ const deleteBlog = async (req, res) => {
     });
 };
 const editorUpload = async (req, res) => {
-    const result = await BlogService.editorUpload(req);
+    const result = await blog_service_1.BlogService.editorUpload(req);
     res.status(200).json({
         success: true,
         message: "Editor upload successfully",
         data: result
     });
 };
-export const BlogController = { createBlog, getAllBlog, getSingleBlog, updateBlog, deleteBlog, editorUpload };
+exports.BlogController = { createBlog, getAllBlog, getSingleBlog, updateBlog, deleteBlog, editorUpload };

@@ -1,8 +1,8 @@
 import { UserRole } from "@prisma/client"
-import auth from "../../middleware/auth.js"
-import { BlogController } from "./blog.controller.js"
+import auth from "../../middleware/auth"
+import { BlogController } from "./blog.controller"
 import { Router } from "express"
-import { FileUploader } from "../../helper/fileUploader.js"
+import { FileUploader } from "../../helper/fileUploader"
 
 const router = Router()
 

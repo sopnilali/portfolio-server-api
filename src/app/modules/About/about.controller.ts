@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { catchAsync } from "../../helper/catchAsync.js";
-import sendResponse from "../../helper/sendResponse.js";
-import { aboutService } from "./about.service.js";
+import { catchAsync } from "../../helper/catchAsync";
+import sendResponse from "../../helper/sendResponse";
+import { aboutService } from "./about.service";
 
 const createAbout = catchAsync(async (req: Request, res: Response<any, Record<string, any>>) => {
     const result = await aboutService.createAboutfromDB(req);

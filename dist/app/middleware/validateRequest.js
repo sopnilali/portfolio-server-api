@@ -1,6 +1,8 @@
-import { catchAsync } from '../helper/catchAsync.js';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const catchAsync_1 = require("../helper/catchAsync");
 const validateRequest = (schema) => {
-    return catchAsync(async (req, res, next) => {
+    return (0, catchAsync_1.catchAsync)(async (req, res, next) => {
         await schema.parseAsync({
             body: req.body,
             cookies: req.cookies,
@@ -8,4 +10,4 @@ const validateRequest = (schema) => {
         next();
     });
 };
-export default validateRequest;
+exports.default = validateRequest;

@@ -1,48 +1,53 @@
-import express from 'express';
-import { UserRoutes } from '../modules/User/user.route.js';
-import { AuthRoutes } from '../modules/Auth/auth.route.js';
-import { ProjectRoutes } from '../modules/Project/project.route.js';
-import { ExperienceRoutes } from '../modules/Experience/experience.route.js';
-import { BlogRoutes } from '../modules/Blog/blog.route.js';
-import { SkillRoutes } from '../modules/Skill/skill.route.js';
-import { ContactRoutes } from '../modules/Contact/contact.route.js';
-import { Aboutroutes } from '../modules/About/about.route.js';
-const router = express.Router();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const user_route_1 = require("../modules/User/user.route");
+const auth_route_1 = require("../modules/Auth/auth.route");
+const project_route_1 = require("../modules/Project/project.route");
+const experience_route_1 = require("../modules/Experience/experience.route");
+const blog_route_1 = require("../modules/Blog/blog.route");
+const skill_route_1 = require("../modules/Skill/skill.route");
+const contact_route_1 = require("../modules/Contact/contact.route");
+const about_route_1 = require("../modules/About/about.route");
+const router = express_1.default.Router();
 const moduleRoutes = [
     {
         path: "/user",
-        routes: UserRoutes
+        routes: user_route_1.UserRoutes
     },
     {
         path: '/auth',
-        routes: AuthRoutes
+        routes: auth_route_1.AuthRoutes
     },
     {
         path: '/experience',
-        routes: ExperienceRoutes
+        routes: experience_route_1.ExperienceRoutes
     },
     {
         path: '/project',
-        routes: ProjectRoutes
+        routes: project_route_1.ProjectRoutes
     },
     {
         path: '/blog',
-        routes: BlogRoutes
+        routes: blog_route_1.BlogRoutes
     },
     {
         path: '/skill',
-        routes: SkillRoutes
+        routes: skill_route_1.SkillRoutes
     },
     {
         path: '/contact',
-        routes: ContactRoutes
+        routes: contact_route_1.ContactRoutes
     },
     {
         path: '/about',
-        routes: Aboutroutes
+        routes: about_route_1.Aboutroutes
     }
 ];
 moduleRoutes.forEach(({ path, routes }) => {
     router.use(path, routes);
 });
-export default router;
+exports.default = router;

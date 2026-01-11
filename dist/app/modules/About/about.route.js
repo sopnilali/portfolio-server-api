@@ -1,18 +1,24 @@
-import express from 'express';
-import auth from '../../middleware/auth.js';
-import { UserRole } from '@prisma/client';
-import { FileUploader } from '../../helper/fileUploader.js';
-import { aboutController } from './about.controller.js';
-const router = express.Router();
-router.post('/create', auth(UserRole.Admin), FileUploader.upload.single('file'), (req, res, next) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Aboutroutes = void 0;
+const express_1 = __importDefault(require("express"));
+const auth_1 = __importDefault(require("../../middleware/auth"));
+const client_1 = require("@prisma/client");
+const fileUploader_1 = require("../../helper/fileUploader");
+const about_controller_1 = require("./about.controller");
+const router = express_1.default.Router();
+router.post('/create', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('file'), (req, res, next) => {
     req.body = JSON.parse(req.body.data);
-    return aboutController.createAbout(req, res, next);
+    return about_controller_1.aboutController.createAbout(req, res, next);
 });
 router.get('/', (req, res, next) => {
-    return aboutController.GetAllAbout(req, res, next);
+    return about_controller_1.aboutController.GetAllAbout(req, res, next);
 });
-router.patch('/:id', auth(UserRole.Admin), FileUploader.upload.single('file'), (req, res, next) => {
+router.patch('/:id', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('file'), (req, res, next) => {
     req.body = JSON.parse(req.body.data);
-    return aboutController.updateAbout(req, res, next);
+    return about_controller_1.aboutController.updateAbout(req, res, next);
 });
-export const Aboutroutes = router;
+exports.Aboutroutes = router;

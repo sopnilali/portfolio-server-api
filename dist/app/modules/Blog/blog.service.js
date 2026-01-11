@@ -1,12 +1,18 @@
-import { FileUploader } from "../../helper/fileUploader.js";
-import prisma from "../../utils/prisma.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BlogService = void 0;
+const fileUploader_1 = require("../../helper/fileUploader");
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createBlog = async (req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.thumbnail = uploadfile?.secure_url;
     }
-    const result = await prisma.blog.create({
+    const result = await prisma_1.default.blog.create({
         data: {
             ...req.body,
             userId: req.user.id
@@ -15,7 +21,7 @@ const createBlog = async (req) => {
     return result;
 };
 const getAllBlog = async () => {
-    const result = await prisma.blog.findMany({
+    const result = await prisma_1.default.blog.findMany({
         include: {
             user: {
                 select: {
@@ -33,7 +39,7 @@ const getAllBlog = async () => {
     return result;
 };
 const getSingleBlog = async (id) => {
-    const result = await prisma.blog.findUnique({
+    const result = await prisma_1.default.blog.findUnique({
         where: { id },
         include: {
             user: true
@@ -44,26 +50,26 @@ const getSingleBlog = async (id) => {
 const updateBlog = async (id, req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.thumbnail = uploadfile?.secure_url;
     }
-    const result = await prisma.blog.update({
+    const result = await prisma_1.default.blog.update({
         where: { id },
         data: req.body
     });
     return result;
 };
 const deleteBlog = async (id) => {
-    const result = await prisma.blog.delete({
+    const result = await prisma_1.default.blog.delete({
         where: { id }
     });
     return result;
 };
 const editorUpload = async (req) => {
-    const result = await FileUploader.uploadEditorFileToCloudinary(req.file);
+    const result = await fileUploader_1.FileUploader.uploadEditorFileToCloudinary(req.file);
     return result;
 };
-export const BlogService = {
+exports.BlogService = {
     createBlog,
     getAllBlog,
     getSingleBlog,

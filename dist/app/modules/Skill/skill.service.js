@@ -1,18 +1,24 @@
-import { FileUploader } from "../../helper/fileUploader.js";
-import prisma from "../../utils/prisma.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SkillService = void 0;
+const fileUploader_1 = require("../../helper/fileUploader");
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createSkill = async (req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.icon = uploadfile?.secure_url;
     }
-    const result = await prisma.skill.create({
+    const result = await prisma_1.default.skill.create({
         data: req.body
     });
     return result;
 };
 const getAllSkill = async () => {
-    const result = await prisma.skill.findMany({
+    const result = await prisma_1.default.skill.findMany({
         orderBy: {
             createdAt: 'desc'
         }
@@ -20,7 +26,7 @@ const getAllSkill = async () => {
     return result;
 };
 const getSingleSkill = async (id) => {
-    const result = await prisma.skill.findUnique({
+    const result = await prisma_1.default.skill.findUnique({
         where: {
             id
         }
@@ -30,10 +36,10 @@ const getSingleSkill = async (id) => {
 const updateSkill = async (id, req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.icon = uploadfile?.secure_url;
     }
-    const result = await prisma.skill.update({
+    const result = await prisma_1.default.skill.update({
         where: {
             id
         },
@@ -42,11 +48,11 @@ const updateSkill = async (id, req) => {
     return result;
 };
 const deleteSkill = async (id) => {
-    const result = await prisma.skill.delete({
+    const result = await prisma_1.default.skill.delete({
         where: {
             id
         }
     });
     return result;
 };
-export const SkillService = { createSkill, getAllSkill, getSingleSkill, updateSkill, deleteSkill };
+exports.SkillService = { createSkill, getAllSkill, getSingleSkill, updateSkill, deleteSkill };

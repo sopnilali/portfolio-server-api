@@ -1,10 +1,16 @@
-import express from 'express';
-import { UserRole } from '@prisma/client';
-import auth from '../../middleware/auth.js';
-import { ExperienceController } from "./experience.controller.js";
-const router = express.Router();
-router.post('/', auth(UserRole.Admin), ExperienceController.createExperience);
-router.get('/', ExperienceController.getAllExperience); // public route
-router.patch('/:id', auth(UserRole.Admin), ExperienceController.updateExperience);
-router.delete('/:id', auth(UserRole.Admin), ExperienceController.deleteExperience);
-export const ExperienceRoutes = router;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExperienceRoutes = void 0;
+const express_1 = __importDefault(require("express"));
+const client_1 = require("@prisma/client");
+const auth_1 = __importDefault(require("../../middleware/auth"));
+const experience_controller_1 = require("./experience.controller");
+const router = express_1.default.Router();
+router.post('/', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.createExperience);
+router.get('/', experience_controller_1.ExperienceController.getAllExperience); // public route
+router.patch('/:id', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.updateExperience);
+router.delete('/:id', (0, auth_1.default)(client_1.UserRole.Admin), experience_controller_1.ExperienceController.deleteExperience);
+exports.ExperienceRoutes = router;

@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express'
-import { FileUploader } from '../../helper/fileUploader.js'
+import { FileUploader } from '../../helper/fileUploader'
 import { UserRole } from '@prisma/client'
-import auth from '../../middleware/auth.js'
-import { ExperienceController } from "./experience.controller.js"
+import auth from '../../middleware/auth'
+import { ExperienceController } from "./experience.controller"
 
 const router = express.Router()
 

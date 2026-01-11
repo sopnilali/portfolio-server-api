@@ -1,35 +1,40 @@
-import express from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import status from 'http-status';
-import router from './app/routes/index.js';
-import globalErrorHandler from './app/middleware/globalErrorHandler.js';
-const app = express();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const http_status_1 = __importDefault(require("http-status"));
+const index_1 = __importDefault(require("./app/routes/index"));
+const globalErrorHandler_1 = __importDefault(require("./app/middleware/globalErrorHandler"));
+const app = (0, express_1.default)();
 // CORS configuration
-app.use(cors({
+app.use((0, cors_1.default)({
     origin: ['http://localhost:3000', 'https://www.sharpshooterpubg.xyz', 'https://sharpshooterpubg.xyz', 'https://my-portfolio-dashboard-nine.vercel.app', 'https://mdabduladudui.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 // middlwares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-app.use(cookieParser());
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true, limit: '50mb' }));
+app.use((0, cookie_parser_1.default)());
 // routers
-app.use('/api', router);
+app.use('/api', index_1.default);
 //global routes
 app.get('/', (req, res) => {
     res.json({
-        status: status.OK,
+        status: http_status_1.default.OK,
         message: "portfolio server is running!!"
     });
 });
 // global error handler
-app.use(globalErrorHandler);
+app.use(globalErrorHandler_1.default);
 // not found route handler
 app.use((req, res, next) => {
-    res.status(status.NOT_FOUND).json({
+    res.status(http_status_1.default.NOT_FOUND).json({
         success: false,
         message: "Api Not Found",
         error: {
@@ -38,4 +43,4 @@ app.use((req, res, next) => {
         }
     });
 });
-export default app;
+exports.default = app;

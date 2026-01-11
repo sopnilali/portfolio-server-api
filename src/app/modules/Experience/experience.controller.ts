@@ -1,6 +1,6 @@
-import { catchAsync } from "../../helper/catchAsync.js";
-import sendResponse from "../../helper/sendResponse.js";
-import { ExperienceService } from "./experience.service.js";
+import { catchAsync } from "../../helper/catchAsync";
+import sendResponse from "../../helper/sendResponse";
+import { ExperienceService } from "./experience.service";
 
 const createExperience = catchAsync(async (req, res) => {
     const result = await ExperienceService.createExperience(req)

@@ -1,13 +1,13 @@
 import { Prisma, User, UserStatus } from "@prisma/client";
-import prisma from "../../utils/prisma.js";
-import { FileUploader } from "../../helper/fileUploader.js";
-import AppError from "../../errors/AppError.js";
+import prisma from "../../utils/prisma";
+import { FileUploader } from "../../helper/fileUploader";
+import AppError from "../../errors/AppError";
 import status from "http-status";
 import * as bcrypt from "bcrypt";
-import config from "../../config/index.js";
-import { userSearchAbleFields } from "./user.constant.js";
-import { IPaginationOptions } from "../../interface/pagination.type.js";
-import { paginationHelper } from "../../helper/paginationHelper.js";
+import config from "../../config/index";
+import { userSearchAbleFields } from './user.constant';
+import { IPaginationOptions } from "../../interface/pagination.type";
+import { paginationHelper } from "../../helper/paginationHelper";
 
 
 const createUser = async (req: any) => {

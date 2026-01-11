@@ -1,10 +1,10 @@
 import status from "http-status";
-import AppError from "../errors/AppError.js";
-import { catchAsync } from "../helper/catchAsync.js"
-import { TokenUtils } from "../utils/token.js";
-import config from "../config/index.js";
+import AppError from "../errors/AppError";
+import { catchAsync } from "../helper/catchAsync"
+import { TokenUtils } from "../utils/token";
+import config from "../config/index";
 import { Secret } from "jsonwebtoken";
-import { IAuthUser } from "../modules/Auth/auth.interface.js";
+import { IAuthUser } from "../modules/Auth/auth.interface";
 
 const auth = (...roles: string[])=> {
     return catchAsync(async (req, res, next) => {

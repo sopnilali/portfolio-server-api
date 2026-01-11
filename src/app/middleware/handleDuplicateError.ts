@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { TErrorSources, TGenericErrorResponse } from "../interface/errors.js";
+import { TErrorSources, TGenericErrorResponse } from '../interface/errors';
 
 
 

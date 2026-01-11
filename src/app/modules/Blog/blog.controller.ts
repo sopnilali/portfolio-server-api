@@ -1,4 +1,4 @@
-import { BlogService } from "./blog.service.js"
+import { BlogService } from "./blog.service"
 
 const createBlog = async (req: any, res: any) => {
     const result = await BlogService.createBlog(req)

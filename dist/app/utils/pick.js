@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const pick = (obj, keys) => {
     const finalObj = {};
     for (const key of keys) {
@@ -7,4 +9,4 @@ const pick = (obj, keys) => {
     }
     return finalObj;
 };
-export default pick;
+exports.default = pick;

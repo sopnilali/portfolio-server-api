@@ -1,12 +1,18 @@
-import { FileUploader } from "../../helper/fileUploader.js";
-import prisma from "../../utils/prisma.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProjectService = void 0;
+const fileUploader_1 = require("../../helper/fileUploader");
+const prisma_1 = __importDefault(require("../../utils/prisma"));
 const createProject = async (req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.imageUrl = uploadfile?.secure_url;
     }
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma_1.default.$transaction(async (tx) => {
         // Create new record
         const newRecord = await tx.project.create({
             data: req.body
@@ -16,7 +22,7 @@ const createProject = async (req) => {
     return result;
 };
 const getAllProject = async () => {
-    const result = await prisma.project.findMany({
+    const result = await prisma_1.default.project.findMany({
         orderBy: {
             createdAt: 'desc'
         }
@@ -24,7 +30,7 @@ const getAllProject = async () => {
     return result;
 };
 const getSingleProject = async (id) => {
-    const result = await prisma.project.findUnique({
+    const result = await prisma_1.default.project.findUnique({
         where: {
             id,
         }
@@ -34,10 +40,10 @@ const getSingleProject = async (id) => {
 const updateProject = async (id, req) => {
     const file = req.file;
     if (file) {
-        const uploadfile = await FileUploader.uploadToCloudinary(file);
+        const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
         req.body.imageUrl = uploadfile?.secure_url;
     }
-    const result = await prisma.project.update({
+    const result = await prisma_1.default.project.update({
         where: {
             id
         },
@@ -46,14 +52,14 @@ const updateProject = async (id, req) => {
     return result;
 };
 const deleteProject = async (id) => {
-    const result = await prisma.project.delete({
+    const result = await prisma_1.default.project.delete({
         where: {
             id
         }
     });
     return result;
 };
-export const ProjectService = {
+exports.ProjectService = {
     createProject,
     getAllProject,
     getSingleProject,

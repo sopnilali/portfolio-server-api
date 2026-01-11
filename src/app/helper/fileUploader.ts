@@ -2,8 +2,8 @@ import multer from "multer";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
-import config from "../config/index.js";
-import { ICloudinaryResponse, IFile } from "../interface/file.type.js";
+import config from "../config/index";
+import { ICloudinaryResponse, IFile } from "../interface/file.type";
 
 // Configure Cloudinary
 cloudinary.config({
