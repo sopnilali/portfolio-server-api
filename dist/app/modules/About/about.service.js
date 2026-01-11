@@ -6,21 +6,13 @@ const createAboutfromDB = async (req) => {
         const uploadfile = await FileUploader.uploadToCloudinary(file);
         req.body.imageUrl = uploadfile?.secure_url;
     }
-    const result = await prisma.$transaction(async (tx) => {
-        // Create new record
-        const newRecord = await tx.about.create({
-            data: req.body
-        });
-        return newRecord;
+    const result = await prisma.about.create({
+        data: req.body
     });
     return result;
 };
-const GetAboutfromDB = async () => {
-    const result = await prisma.project.findMany({
-        orderBy: {
-            createdAt: 'desc'
-        }
-    });
+const GetAllAboutfromDB = async () => {
+    const result = await prisma.about.findMany();
     return result;
 };
 const updateAboutfromDB = async (id, req) => {
@@ -29,15 +21,23 @@ const updateAboutfromDB = async (id, req) => {
         const uploadfile = await FileUploader.uploadToCloudinary(file);
         req.body.imageUrl = uploadfile?.secure_url;
     }
-    const result = await prisma.project.update({
+    // Extract only the fields that are allowed (exclude auto-generated fields)
+    const { id: _, createdAt, updatedAt, ...data } = req.body;
+    const result = await prisma.about.update({
         where: {
             id
         },
-        data: req.body
+        data: {
+            ...(data.nameTitle !== undefined && { nameTitle: data.nameTitle }),
+            ...(data.professonName !== undefined && { professonName: data.professonName }),
+            ...(data.shortdescription !== undefined && { shortdescription: data.shortdescription }),
+            ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
+        }
     });
     return result;
 };
 export const aboutService = {
     createAboutfromDB,
-    updateAboutfromDB
+    updateAboutfromDB,
+    GetAllAboutfromDB
 };
