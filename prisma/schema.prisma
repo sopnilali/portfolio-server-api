@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  password  String
+  avaterUrl String?
+  role      UserRole   @default(User)
+  status    UserStatus @default(Active)
+  isDeleted Boolean    @default(false)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  blog      Blog[]
+
+  @@map("users")
+}
+
+model About {
+  id               String  @id @default(uuid())
+  nameTitle        String
+  professonName    String
+  shortdescription String
+  imageUrl         String?
+}
+
+model Project {
+  id              String        @id @default(uuid())
+  title           String
+  description     String
+  technology      Json
+  duration        String
+  liveUrl         String?
+  backendrepoUrl  String?
+  frontendrepoUrl String?
+  imageUrl        String?
+  status          ProjectStatus @default(Pending)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("projects")
+}
+
+model Blog {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  thumbnail String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blogs")
+}
+
+model Experience {
+  id          String   @id @default(uuid())
+  company     String
+  position    String
+  startDate   DateTime
+  endDate     DateTime
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("experiences")
+}
+
+model Skill {
+  id        String   @id @default(uuid())
+  name      String
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("skills")
+}
+
+model Contact {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}
+
+enum ProjectStatus {
+  Completed
+  Pending
+}
+
+enum UserStatus {
+  Active
+  Blocked
+}
+
+enum UserRole {
+  Admin
+  User
+}
