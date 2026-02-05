@@ -34,6 +34,7 @@ const storage = multer_1.default.diskStorage({
     },
 });
 // File filter for different upload scenarios
+// Use a broad `any` type for `file` to avoid dependency on Express's `Multer` type in global namespace
 const fileFilter = (req, file, cb) => {
     // For text editor/TapTap editor uploads, we might want to accept more file types
     const isEditorUpload = req.path.includes('/editor-upload');
