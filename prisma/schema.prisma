@@ -75,11 +75,11 @@ enum BlogStatus {
 }
 
 model Experience {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   company     String
   position    String
   startDate   DateTime
-  endDate     DateTime
+  endDate     DateTime?
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
