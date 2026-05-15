@@ -12,6 +12,7 @@ const blog_route_1 = require("../modules/Blog/blog.route");
 const skill_route_1 = require("../modules/Skill/skill.route");
 const contact_route_1 = require("../modules/Contact/contact.route");
 const about_route_1 = require("../modules/About/about.route");
+const menu_route_1 = require("../modules/Menu/menu.route");
 const router = express_1.default.Router();
 const moduleRoutes = [
     {
@@ -45,6 +46,10 @@ const moduleRoutes = [
     {
         path: '/about',
         routes: about_route_1.Aboutroutes
+    },
+    {
+        path: '/menu',
+        routes: menu_route_1.MenuRoutes
     }
 ];
 moduleRoutes.forEach(({ path, routes }) => {

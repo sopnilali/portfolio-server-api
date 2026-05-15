@@ -126,9 +126,12 @@ const uploadEditorFileToCloudinary = async (file: IFile) => {
   }
 };
 
+const parseFormData = multer();
+
 export const FileUploader = {
   upload, // Regular file upload middleware
   editorUpload, // Special middleware for editor uploads
+  parseFormData, // form-data without files
   uploadToCloudinary, // Regular Cloudinary upload
   uploadEditorFileToCloudinary, // Special handler for editor files
 };

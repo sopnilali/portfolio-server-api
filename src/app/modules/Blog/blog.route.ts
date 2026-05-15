@@ -6,13 +6,13 @@ import { FileUploader } from "../../helper/fileUploader"
 
 const router = Router()
 
-router.post('/create', auth(UserRole.Admin), FileUploader.upload.single('thumbnail'), (req: any, res: any) => {
+router.post('/create', auth(UserRole.Admin), FileUploader.upload.single('file'), (req: any, res: any) => {
     req.body = JSON.parse(req.body.data)
     BlogController.createBlog(req, res)
 })
 router.get('/all', BlogController.getAllBlog)
 router.get('/:id', BlogController.getSingleBlog)
-router.patch('/:id', auth(UserRole.Admin), FileUploader.upload.single('thumbnail'), (req: any, res: any) => {
+router.patch('/:id', auth(UserRole.Admin), FileUploader.upload.single('file'), (req: any, res: any) => {
     req.body = JSON.parse(req.body.data)
     BlogController.updateBlog(req, res)
 })

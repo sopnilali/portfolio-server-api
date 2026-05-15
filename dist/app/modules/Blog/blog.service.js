@@ -10,13 +10,19 @@ const createBlog = async (req) => {
     const file = req.file;
     if (file) {
         const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
-        req.body.thumbnail = uploadfile?.secure_url;
+        req.body.imageUrl = uploadfile?.secure_url;
     }
+    const { title, shortdescription, content, tags, imageUrl, status } = req.body;
     const result = await prisma_1.default.blog.create({
         data: {
-            ...req.body,
-            userId: req.user.id
-        }
+            title,
+            shortdescription,
+            content,
+            tags,
+            imageUrl,
+            status,
+            userId: req.user.id,
+        },
     });
     return result;
 };
@@ -51,11 +57,19 @@ const updateBlog = async (id, req) => {
     const file = req.file;
     if (file) {
         const uploadfile = await fileUploader_1.FileUploader.uploadToCloudinary(file);
-        req.body.thumbnail = uploadfile?.secure_url;
+        req.body.imageUrl = uploadfile?.secure_url;
     }
+    const { id: _, createdAt, updatedAt, user, userId, ...data } = req.body;
     const result = await prisma_1.default.blog.update({
         where: { id },
-        data: req.body
+        data: {
+            ...(data.title !== undefined && { title: data.title }),
+            ...(data.shortdescription !== undefined && { shortdescription: data.shortdescription }),
+            ...(data.content !== undefined && { content: data.content }),
+            ...(data.tags !== undefined && { tags: data.tags }),
+            ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
+            ...(data.status !== undefined && { status: data.status }),
+        },
     });
     return result;
 };

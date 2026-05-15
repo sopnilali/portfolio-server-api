@@ -10,13 +10,13 @@ const blog_controller_1 = require("./blog.controller");
 const express_1 = require("express");
 const fileUploader_1 = require("../../helper/fileUploader");
 const router = (0, express_1.Router)();
-router.post('/create', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('thumbnail'), (req, res) => {
+router.post('/create', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('file'), (req, res) => {
     req.body = JSON.parse(req.body.data);
     blog_controller_1.BlogController.createBlog(req, res);
 });
 router.get('/all', blog_controller_1.BlogController.getAllBlog);
 router.get('/:id', blog_controller_1.BlogController.getSingleBlog);
-router.patch('/:id', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('thumbnail'), (req, res) => {
+router.patch('/:id', (0, auth_1.default)(client_1.UserRole.Admin), fileUploader_1.FileUploader.upload.single('file'), (req, res) => {
     req.body = JSON.parse(req.body.data);
     blog_controller_1.BlogController.updateBlog(req, res);
 });

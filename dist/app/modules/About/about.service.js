@@ -38,6 +38,8 @@ const updateAboutfromDB = async (id, req) => {
             ...(data.professonName !== undefined && { professonName: data.professonName }),
             ...(data.shortdescription !== undefined && { shortdescription: data.shortdescription }),
             ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
+            ...(data.resumeUrl !== undefined && { resumeUrl: data.resumeUrl }),
+            ...(data.cvUrl !== undefined && { cvUrl: data.cvUrl }),
         }
     });
     return result;
